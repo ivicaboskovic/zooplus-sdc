@@ -37,7 +37,7 @@
 					</div>
 				</div>
 			</div>
-			<form action="/j_spring_security_check" id="login" method="post" autocomplete="off" class="form-horizontal">
+			<form th:action="@{/j_spring_security_check}" id="login" method="post" autocomplete="off" class="form-horizontal">
 
 				<div class="form-group"> 
 					<label for="username" class="col-xs-3 control-label" th:text="#{user.email}">Username</label>

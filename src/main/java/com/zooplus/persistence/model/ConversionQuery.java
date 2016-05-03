@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @NamedQueries({ 
-	@NamedQuery(name = ConversionQuery.FIND_QUERIES, query = "SELECT c FROM ConversionQuery c order by c.date DESC"),
+	@NamedQuery(name = ConversionQuery.FIND_QUERIES, query = "SELECT c FROM ConversionQuery c order by c.created DESC"),
 
 })
 public class ConversionQuery extends BaseEntity<Long> {
