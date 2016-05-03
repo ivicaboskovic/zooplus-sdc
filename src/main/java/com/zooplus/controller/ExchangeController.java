@@ -19,6 +19,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
 import com.zooplus.persistence.model.ConversionQuery;
@@ -47,9 +48,9 @@ public class ExchangeController extends BaseController{
 	
 	@RequestMapping(value = {"/index.html", "/convert"}, method = RequestMethod.GET)
 	@Secured({"ROLE_USER"})
-	public String adminIndex(Model model){
+	public String adminIndex(Model model, HttpServletRequest request){
 		model.addAttribute("conversionQuery", new ConversionQuery());
-		model.addAttribute("queries", exchangeService.getQueries());
+		model.addAttribute("queries", exchangeService.getQueries(getLoggedUser(request)));
 		return "index";
 	}
 	
@@ -60,12 +61,19 @@ public class ExchangeController extends BaseController{
 			return "index";
 		}else{
 			try {
+				conversionQuery.setUser(getLoggedUser(request));
 				conversionQuery = exchangeService.exchange(conversionQuery);
-				request.setAttribute("successMessage", messageSource.getMessage("convert.currency.success", new String[] {conversionQuery.getCurrencyFrom().getCode() + " " +conversionQuery.getCurrencyFrom().getName(), conversionQuery.getCurrencyTo().getCode(), conversionQuery.getRate().toString()}, locale));
+				if (conversionQuery!=null){
+					request.setAttribute("successMessage", messageSource.getMessage("convert.currency.success", new String[] {conversionQuery.getCurrencyFrom().getCode() + " " +conversionQuery.getCurrencyFrom().getName(), conversionQuery.getCurrencyTo().getCode(), conversionQuery.getRate().toString()}, locale));
+				}else{
+					request.setAttribute("errorMessage", messageSource.getMessage("convert.currency.nodata", new String[]{}, locale));
+				}
+			}catch (HttpClientErrorException e){
+				request.setAttribute("errorMessage", messageSource.getMessage("convert.currency.nodata", new String[]{}, locale));
 			}catch (RestClientException e){
 				request.setAttribute("errorMessage", messageSource.getMessage("convert.currency.error", new String[]{}, locale));
 			}
-			model.addAttribute("queries", exchangeService.getQueries());
+			model.addAttribute("queries", exchangeService.getQueries(getLoggedUser(request)));
 			return "index";
 		}
 	}	

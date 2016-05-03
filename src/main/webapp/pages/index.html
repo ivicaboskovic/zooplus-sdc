@@ -74,7 +74,7 @@
 				<div class="col-xs-3 col-xs-offset-0 col-md-3 col-md-offset-0">
 					<div th:class="${#fields.hasErrors('date')} ? 'form-group has-error' : 'form-group'">
 						<label for="date" class="col-xs-3 control-label" th:text="#{convert.date}">date</label>
-						<div class="col-xs-9"><input id="date" class="form-control" maxlength="50" type="text" th:field="*{date}" placeholder="dd-MM-yyyy"/></div>
+						<div class="col-xs-9"><input id="date" class="form-control" maxlength="50" type="text" th:field="*{date}" placeholder="dd/MM/yyyy"/></div>
 						<div class="help-block with-errors">
 		                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('date')}">
 		                  		<li th:each="err : ${#fields.errors('date')}" th:text="${err}" />

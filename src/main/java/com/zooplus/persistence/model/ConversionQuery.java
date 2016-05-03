@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @NamedQueries({ 
-	@NamedQuery(name = ConversionQuery.FIND_QUERIES, query = "SELECT c FROM ConversionQuery c order by c.created DESC"),
+	@NamedQuery(name = ConversionQuery.FIND_QUERIES, query = "SELECT c FROM ConversionQuery c WHERE c.user = :user order by c.created DESC"),
 
 })
 public class ConversionQuery extends BaseEntity<Long> {
@@ -41,6 +41,9 @@ public class ConversionQuery extends BaseEntity<Long> {
 	
 	
 	private Double rate;
+	
+	@ManyToOne
+	private User user;
 
 
 	public Currency getCurrencyFrom() {
@@ -80,6 +83,16 @@ public class ConversionQuery extends BaseEntity<Long> {
 
 	public void setRate(Double rate) {
 		this.rate = rate;
+	}
+
+
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

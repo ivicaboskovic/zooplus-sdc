@@ -1,7 +1,5 @@
 package com.zooplus.service.impl;
 
-import static org.junit.Assert.fail;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -16,6 +14,7 @@ import org.springframework.util.Assert;
 
 import com.zooplus.persistence.model.ConversionQuery;
 import com.zooplus.persistence.model.Currency;
+import com.zooplus.persistence.model.User;
 import com.zooplus.service.CurrencyService;
 import com.zooplus.service.ExchangeService;
 
@@ -36,21 +35,23 @@ public class ExchangeServiceImplTest {
 	@Test
 	public void testExchange() {
 		
-		
+		User user = new User();
+		user.setId(1l);
 		List<Currency> currencies = curencyService.getCurrencies();
 		ConversionQuery conversionQuery = new ConversionQuery();
 		conversionQuery.setCurrencyFrom(currencies.get(0));
 		conversionQuery.setCurrencyTo(currencies.get(1));
+		conversionQuery.setUser(user);
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.HOUR_OF_DAY, 0);
-		calendar.set(Calendar.MINUTE, 0);
-		calendar.set(Calendar.SECOND, 0);
-		calendar.set(Calendar.MILLISECOND, 0);
+		calendar.set(Calendar.YEAR, 2015);
+		calendar.set(Calendar.MONTH, 4);
+		calendar.set(Calendar.DATE, 1);
 		conversionQuery.setDate(calendar.getTime());
 		conversionQuery = exchangeService.exchange(conversionQuery);
 		
+		
 		Assert.notNull(conversionQuery.getId());
-		Assert.notEmpty(exchangeService.getQueries());
+		Assert.notEmpty(exchangeService.getQueries(user));
 	}
 
 }
