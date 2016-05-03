@@ -405,8 +405,8 @@
 	</build>
 
 	<profiles>
-		<profile>
-			<id>local</id>
+	<profile>
+			<id>ci</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -418,7 +418,31 @@
 				<show.sql>false</show.sql>
 				<hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
 				<db.hbm2ddl>create-drop</db.hbm2ddl>
-				<logAppender>INFO, stdout, file, errorfile</logAppender>
+				<logAppender>INFO, stdout</logAppender>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<configuration>
+							<warName>${project.artifactId}</warName>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>local</id>
+			<properties>
+				<db.driver>org.hsqldb.jdbcDriver</db.driver>
+				<db.url>jdbc:hsqldb:mem</db.url>
+				<db.username>sa</db.username>
+				<db.password></db.password>
+				<show.sql>false</show.sql>
+				<hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
+				<db.hbm2ddl>create-drop</db.hbm2ddl>
+				<logAppender>INFO, stdout</logAppender>
 			</properties>
 			<build>
 				<plugins>
