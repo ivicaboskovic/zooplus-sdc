@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+  xmlns="http://java.sun.com/xml/ns/persistence" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+  http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+  <persistence-unit name="zooplusPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>com.zooplus.persistence.model.User</class>
+    <class>com.zooplus.persistence.model.Country</class>
+    <class>com.zooplus.persistence.model.Currency</class>
+    <class>com.zooplus.persistence.model.ConversionQuery</class>
+    <properties>
+       <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+	   <property name="hibernate.show_sql" value="false"/>
+       <property name="hibernate.format_sql" value="true"/>
+       <property name="hibernate.hbm2ddl.auto" value="${db.hbm2ddl}"/>
+    </properties>
+  </persistence-unit>
+
+</persistence>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+ </head>
+
+<body>
+  <!--[if lt IE 8]>
+  <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+
+<div class="container hidden-print" th:fragment="footer">
+  <section id="footer ">
+    <div class="footer-stripe"></div>
+  </section>
+  <!-- Bootstrap core JavaScript
+================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="../../../assets/js/jquery/jquery.min.js" th:src="@{/resources/assets/js/jquery/jquery.min.js}"></script>
+
+  <script src="../../../assets/js/bootstrap/bootstrap.min.js" th:src="@{/resources/assets/js/bootstrap/bootstrap.min.js}"></script>
+
+  <script src="../../../assets/js/bootstrap/plugins/canvas-to-blob.min.js" th:src="@{/resources/assets/js/bootstrap/plugins/canvas-to-blob.min.js}"></script>
+  <script src="../../../assets/js/bootstrap/fileinput.min.js" th:src="@{/resources/assets/js/bootstrap/fileinput.min.js}"></script>
+
+  <script src="../../../assets/js/bootstrap/bootstrap-editable.min.js" th:src="@{/resources/assets/js/bootstrap/bootstrap-editable.min.js}"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="../../../assets/js/ie10-viewport-bug-workaround.js" th:src="@{/resources/assets/js/ie10-viewport-bug-workaround.js}"></script>
+
+  <script src="../../../assets/js/custom.js" th:src="@{/resources/assets/js/custom.js}"></script>
+</div>
+
+
+
+</body>
+
+</html>

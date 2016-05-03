@@ -1,0 +1,136 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:tiles="http://www.thymeleaf.org"
+	  class="no-js">
+
+<head>
+</head>
+
+<body>
+<!--[if lt IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<div tiles:fragment="content">
+
+	<form action="/register" id="edit-user" method="post" autocomplete="off" class="form-horizontal" th:object="${user}">
+		<div class="row mt50">
+			<div class="col-xs-12 col-xs-offset-0 col-md-6 col-md-offset-3">
+				<div th:class="${#fields.hasErrors('lastName')} ? 'form-group has-error' : 'form-group'">
+					<label for="firstName" class="col-xs-3 control-label" th:text="#{user.firstName}">First name</label>
+					<div class="col-xs-9"><input name="firstName" id="firstName" class="form-control" maxlength="50" type="text" th:field="*{firstName}" /></div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('firstName')}">
+	                  		<li th:each="err : ${#fields.errors('firstName')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+
+				<div th:class="${#fields.hasErrors('firstName')} ? 'form-group has-error' : 'form-group'">
+					<label for="lastName" class="col-xs-3 control-label" th:text="#{user.lastName}">Last name</label>
+					<div class="col-xs-9"><input name="lastName" id="lastName" class="form-control" maxlength="50" type="text" th:field="*{lastName}"/></div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('lastName')}">
+	                  		<li th:each="err : ${#fields.errors('lastName')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+
+				<div th:class="${#fields.hasErrors('email')} ? 'form-group has-error' : 'form-group'">
+					<label for="email" class="col-xs-3 control-label" th:text="#{user.email}">email</label>
+					<div class="col-xs-9"><input name="email" id="email" class="form-control" maxlength="50" type="text" th:field="*{email}"/></div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('email')}">
+	                  		<li th:each="err : ${#fields.errors('email')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+				
+				<div th:class="${#fields.hasErrors('birthday')} ? 'form-group has-error' : 'form-group'">
+					<label for="birthday" class="col-xs-3 control-label" th:text="#{user.birthday}">birthday</label>
+					<div class="col-xs-9"><input name="email" id="email" class="form-control" maxlength="50" type="text" th:field="*{birthday}" placeholder="MM/DD/YYYY"/></div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('birthday')}">
+	                  		<li th:each="err : ${#fields.errors('birthday')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+			
+				
+				<div th:class="${#fields.hasErrors('street')} ? 'form-group has-error' : 'form-group'">
+					<label for="city" class="col-xs-3 control-label" th:text="#{user.street}">street</label>
+					<div class="col-xs-9"><input name="street" id="street" class="form-control" maxlength="50" type="text" th:field="*{street}"/></div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('street')}">
+	                  		<li th:each="err : ${#fields.errors('street')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+				
+				<div th:class="${#fields.hasErrors('zipCode')} ? 'form-group has-error' : 'form-group'">
+					<label for="zipCode" class="col-xs-3 control-label" th:text="#{user.zipCode}">zip code</label>
+					<div class="col-xs-9"><input name="zipCode" id="zipCode" class="form-control" maxlength="50" type="text" th:field="*{zipCode}"/></div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('zipCode')}">
+	                  		<li th:each="err : ${#fields.errors('zipCode')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+				
+				<div th:class="${#fields.hasErrors('city')} ? 'form-group has-error' : 'form-group'">
+					<label for="city" class="col-xs-3 control-label" th:text="#{user.city}">city</label>
+					<div class="col-xs-9"><input name="city" id="city" class="form-control" maxlength="50" type="text" th:field="*{city}"/></div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('city')}">
+	                  		<li th:each="err : ${#fields.errors('city')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+				
+				<div th:class="${#fields.hasErrors('country')} ? 'form-group has-error' : 'form-group'">
+					<label for="city" class="col-xs-3 control-label" th:text="#{user.country}">country</label>
+					<div class="col-xs-9">
+					<select name="country" id="country" class="form-control" th:field="*{country}">
+						<option value="" th:text="#{user.chooseCountry}">Choose Country</option>
+					  		<option th:each="item : ${countries}"
+					          th:value="${item.id}"
+					          th:text="${item.name}">Country</option>
+					</select>
+					
+					</div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('country')}">
+	                  		<li th:each="err : ${#fields.errors('country')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+				
+				<div th:class="${#fields.hasErrors('password')} ? 'form-group has-error' : 'form-group'">
+					<label for="phone" class="col-xs-3 control-label" th:text="#{user.password}">Password</label>
+					<div class="col-xs-9"><input name="password" id="password" class="form-control" maxlength="50" type="password" th:field="*{password}"/></div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('password')}">
+	                  		<li th:each="err : ${#fields.errors('password')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+				
+				<div th:class="${#fields.hasErrors('passwordRetype')} ? 'form-group has-error' : 'form-group'">
+					<label for="phone" class="col-xs-3 control-label" th:text="#{user.retypePassword}">Retype password</label>
+					<div class="col-xs-9"><input name="passwordRetype" id="passwordRetype" class="form-control" maxlength="50" type="password" th:field="*{passwordRetype}"/></div>
+					<div class="help-block with-errors">
+	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('passwordRetype')}">
+	                  		<li th:each="err : ${#fields.errors('passwordRetype')}" th:text="${err}" />
+	                  	</ul>
+                  	</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-9 col-xs-offset-3"><input class="btn btn-primary" value="Save user" type="submit"/></div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+</body>
+
+</html>
