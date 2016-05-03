@@ -5,3 +5,8 @@ mem.lck
 *.log
 mem.properties
 *.script
+*.lck
+mem.lck
+*.log
+mem.properties
+*.script
