@@ -54,4 +54,7 @@ public class Currency extends BaseEntity<Long> {
 		this.name = name;
 	}
 	
+	public String getDisplayName(){
+		return code + " - " + name;
+	}
 }

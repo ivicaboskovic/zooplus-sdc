@@ -47,7 +47,7 @@
 				
 				<div th:class="${#fields.hasErrors('birthday')} ? 'form-group has-error' : 'form-group'">
 					<label for="birthday" class="col-xs-3 control-label" th:text="#{user.birthday}">birthday</label>
-					<div class="col-xs-9"><input name="email" id="email" class="form-control" maxlength="50" type="text" th:field="*{birthday}" placeholder="MM/DD/YYYY"/></div>
+					<div class="col-xs-9"><input name="email" id="email" class="form-control" maxlength="50" type="text" th:field="*{birthday}" placeholder="dd-MM-yyyy"/></div>
 					<div class="help-block with-errors">
 	                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('birthday')}">
 	                  		<li th:each="err : ${#fields.errors('birthday')}" th:text="${err}" />

@@ -2,10 +2,20 @@ package com.zooplus.persistence.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Entity
+@NamedQueries({ 
+	@NamedQuery(name = ConversionQuery.FIND_QUERIES, query = "SELECT c FROM ConversionQuery c order by c.date DESC"),
+
+})
 public class ConversionQuery extends BaseEntity<Long> {
 
 	/**
@@ -13,14 +23,19 @@ public class ConversionQuery extends BaseEntity<Long> {
 	 */
 	private static final long serialVersionUID = -3822979774626804325L;
 	
+	public static final String FIND_QUERIES = "FIND_QUERIES";
+	
 	@NotNull
+	@ManyToOne
 	private Currency currencyFrom;
 	
 	@NotNull
+	@ManyToOne
 	private Currency currencyTo;
 	
 	
-	@DateTimeFormat(pattern="MM/dd/yyyy")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
+	@Past
     @NotNull
     private Date date;
 	

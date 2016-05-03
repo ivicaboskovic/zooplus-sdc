@@ -16,6 +16,24 @@
 	<div tiles:fragment="content">
 	
 		<form action="/convert" id="edit-user" method="post" autocomplete="off" class="form-horizontal" th:object="${conversionQuery}">
+			<div class="row mt50" th:if="${errorMessage}">
+				<div class="col-xs-12">
+					<div class="alert alert-danger alert-border-left">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+						<strong>Error: </strong>
+						<span th:text="${errorMessage}"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row mt50" th:if="${successMessage}">
+				<div class="col-xs-12">
+					<div class="alert alert-success alert-border-left">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+						<strong>Success: </strong>
+						<span th:text="${successMessage}"></span>
+					</div>
+				</div>
+			</div>
 			<div class="row mt50">
 				<div class="col-xs-3 col-xs-offset-0 col-md-3 col-md-offset-0">
 					<div th:class="${#fields.hasErrors('currencyFrom')} ? 'form-group has-error' : 'form-group'" >
@@ -56,7 +74,7 @@
 				<div class="col-xs-3 col-xs-offset-0 col-md-3 col-md-offset-0">
 					<div th:class="${#fields.hasErrors('date')} ? 'form-group has-error' : 'form-group'">
 						<label for="date" class="col-xs-3 control-label" th:text="#{convert.date}">date</label>
-						<div class="col-xs-9"><input id="date" class="form-control" maxlength="50" type="text" th:field="*{date}" placeholder="MM/DD/YYYY"/></div>
+						<div class="col-xs-9"><input id="date" class="form-control" maxlength="50" type="text" th:field="*{date}" placeholder="dd-MM-yyyy"/></div>
 						<div class="help-block with-errors">
 		                  	<ul class="list-unstyled" th:if="${#fields.hasErrors('date')}">
 		                  		<li th:each="err : ${#fields.errors('date')}" th:text="${err}" />
@@ -70,8 +88,31 @@
 			</div>
 		</form>
 		
-		
-	</div>
+		<div class="row mt50" th:if="${queries}">
+			<div class="col-xs-1 col-xs-offset-0 col-md-1 col-md-offset-0">
+				<span>&nbsp;</span>
+			</div>
+			<div class="col-xs-3 col-xs-offset-0 col-md-3 col-md-offset-0">
+				<span th:text="#{convert.currencyFrom}"></span>
+			</div>
+			<div class="col-xs-3 col-xs-offset-0 col-md-3 col-md-offset-0">
+				<span th:text="#{convert.currencyTo}"></span>
+			</div>
+			<div class="col-xs-3 col-xs-offset-0 col-md-3 col-md-offset-0">
+				<span th:text="#{convert.date}"></span>
+			</div>
+			<div class="col-xs-2 col-xs-offset-0 col-md-2 col-md-offset-0">
+				<span th:text="#{convert.rate}"></span>
+			</div>
+		</div>
+        <div class="row mt50" th:each="query : ${queries}">
+          <div class="col-xs-1 col-xs-offset-0 col-md-1 col-md-offset-0"><span th:text="${queryStat.index + 1}">1</span></div>
+          <div class="col-xs-3 col-xs-offset-0 col-md-3 col-md-offset-0"><span th:utext="${query.currencyFrom.code}">currency from</span></div>
+          <div class="col-xs-3 col-xs-offset-0 col-md-3 col-md-offset-0"><span th:utext="${query.currencyTo.code}">currency to</span></div>
+          <div class="col-xs-3 col-xs-offset-0 col-md-3 col-md-offset-0"><span th:text="${#calendars.format(query.date,'MM/dd/YYYY')}">date</span></div>
+          <div class="col-xs-2 col-xs-offset-0 col-md-2 col-md-offset-0"><span th:text="${#numbers.formatDecimal(query.rate,1,4)}">rate</span></div>
+         </div>
+        </div>
  </body>
 
 </html>

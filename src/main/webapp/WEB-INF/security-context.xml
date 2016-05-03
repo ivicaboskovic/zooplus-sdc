@@ -14,7 +14,7 @@
 	<security:http auto-config="true" use-expressions="true">
 		<security:intercept-url pattern="/" access="hasAnyRole('ROLE_USER')"  />
 		<security:remember-me key="zooplus" services-ref="rememberMeServices" authentication-success-handler-ref="customAuthenticationSuccessHandler" />
-		<security:form-login  login-page="/login" default-target-url="/index.html" authentication-failure-url="/login" always-use-default-target="false"  authentication-success-handler-ref="customAuthenticationSuccessHandler"/>
+		<security:form-login  login-page="/login" default-target-url="/index.html" authentication-failure-url="/login?errors=true" always-use-default-target="false"  authentication-success-handler-ref="customAuthenticationSuccessHandler"/>
 		<security:logout logout-success-url="/login" logout-url="/logout" invalidate-session="true" />
 		<security:session-management session-fixation-protection="migrateSession" session-authentication-error-url="/login">
 			<security:concurrency-control

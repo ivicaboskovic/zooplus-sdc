@@ -20,21 +20,20 @@
 			<div class="text-center mb30">
 				<img src="../../../assets/img/logo.png" alt="logo" th:src="@{/resources/assets/img/logo.png}"/>
 			</div>
-			<div class="row">
+			<div class="row" th:if="${param.errors}">
 				<div class="col-xs-12">
 					<div class="alert alert-danger alert-border-left">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 						<strong>Error: </strong>
-						Something went wrong
+						<span th:text="#{user.bad.credentials}"></span>
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" th:if="${message}">
 				<div class="col-xs-12">
 					<div class="alert alert-success alert-border-left">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-						<strong>Success: </strong>
-						Something went good
+						<span th:text="${message}"></span>
 					</div>
 				</div>
 			</div>

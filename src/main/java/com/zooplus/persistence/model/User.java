@@ -63,7 +63,7 @@ public class User extends BaseEntity<Long> {
 	private String email;
 
 	
-	@DateTimeFormat(pattern="MM/dd/yyyy")
+	@DateTimeFormat(pattern="dd-MM-yyyy")
     @NotNull @Past
     private Date birthday;
 

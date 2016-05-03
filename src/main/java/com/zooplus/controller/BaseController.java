@@ -20,9 +20,7 @@ import com.zooplus.propertyeditor.EntityPropertyEditor;
 import com.zooplus.service.GenericService;
 
 
-public abstract class BaseController {
-	
-	private final static Logger LOG = LoggerFactory.getLogger(BaseController.class);		
+public abstract class BaseController {	
 	
 	@Autowired 
 	GenericService genericService;

@@ -57,6 +57,6 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/> 
 	
 	<jdbc:initialize-database data-source="dataSource">
-		<jdbc:script location="classpath:countries.sql"/>
+		<jdbc:script location="classpath:initialdata.sql"/>
 	</jdbc:initialize-database>
 </beans>

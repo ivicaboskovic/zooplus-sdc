@@ -1,9 +1,13 @@
 package com.zooplus.controller;
 
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +34,9 @@ public class UserAdministrationController extends BaseController{
 	@Autowired
     @Qualifier("userValidator")
     private Validator validator;
+	
+	@Autowired
+    private MessageSource messageSource;
  
     @InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -51,13 +58,14 @@ public class UserAdministrationController extends BaseController{
 	
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String saveUser(@Valid User user, BindingResult bindingResult) {
+	public String saveUser(@Valid User user, BindingResult bindingResult,  HttpServletRequest request, Locale locale, Model model) {
 		if(bindingResult.hasErrors()){
 			return "edit-user";
 		}else{
 			user.setPassword(ZooplusStringUtil.encryptPassword(user.getPassword()));
 			userService.save(user);
-			return "redirect:/login";
+			request.setAttribute("message", messageSource.getMessage("user.registration.success", new String[]{}, locale));
+			return "login";
 		}
 	}	
 }

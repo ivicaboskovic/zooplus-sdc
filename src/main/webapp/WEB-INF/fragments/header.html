@@ -21,8 +21,8 @@
 					</div>
 					<div class="login-options pull-right">
 						<div class="pull-left mv5">
-							<a href="/logout"><i class="fa fa-sign-out"></i> Logout</a> <br />
-							<p class="lead mn">Hello Scarllet</p>
+							<a href="/logout" sec:authorize="hasRole('ROLE_USER')"><i class="fa fa-sign-out"></i> Logout</a> <br />
+							<p class="lead mn" sec:authorize="hasRole('ROLE_USER')" th:text="${session.loggedUser.firstName + ' ' +  session.loggedUser.lastName}">Hello Scarllet</p>
 						</div>
 						<div class="pull-left mh10">
 						</div>
