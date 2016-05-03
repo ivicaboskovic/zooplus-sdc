@@ -14,9 +14,6 @@
 	
 	<mvc:resources mapping="/resources/**" location="/" cache-period="31556926"/>
 	<mvc:resources mapping="/resources/**" location="classpath:/META-INF/web-resources/" cache-period="31556926" />
-	<mvc:resources mapping="/images/*" location="/images/" cache-period="31556926"/>
-	<mvc:resources mapping="/favicon.ico" location="/favicon.ico" cache-period="31556926"/>
-	<mvc:resources mapping="/robots.txt" location="/robots.txt" cache-period="31556926"/>
 
 	<mvc:annotation-driven />
 
