@@ -1,1 +1,7 @@
 /target/
+
+*.lck
+mem.lck
+*.log
+mem.properties
+*.script
